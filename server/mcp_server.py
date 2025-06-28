@@ -60,7 +60,7 @@ def call_api(product_id: str, params: dict) -> dict:
     url = f'https://console.handaas.com/api/v1/integrator/call_api/{INTEGRATOR_ID}'
     try:
         response = requests.post(url, data=call_params)
-        return response.json().get("data", "查询为空")
+        return response.json().get("data", None) or response.json().get("msgCN", None)
     except Exception as e:
         return "查询失败"
     
@@ -98,7 +98,7 @@ def risk_insight_serious_violations(matchKeyword: str, keywordType: str = None) 
 
 
 @mcp.tool()
-def risk_insight_fuzzy_search(matchKeyword: str, pageIndex: int = None, pageSize: int = None) -> dict:
+def risk_insight_fuzzy_search(matchKeyword: str, pageIndex: int = 1, pageSize: int = None) -> dict:
     """
     该接口的功能是根据提供的企业名称、人名、品牌、产品、岗位等关键词模糊查询相关企业列表。返回匹配的企业列表及其详细信息，用于查找和识别特定的企业信息。
 
@@ -204,13 +204,13 @@ def risk_insight_chattel_mortgage(matchKeyword: str, keywordType: str = None) ->
 
 
 @mcp.tool()
-def risk_insight_court_hearings(matchKeyword: str, pageIndex: int = None, pageSize: int = None, keywordType: str = None) -> dict:
+def risk_insight_court_hearings(matchKeyword: str, pageIndex: int = 1, pageSize: int = 10, keywordType: str = None) -> dict:
     """
     该接口用于查询与给定企业相关的开庭公告信息，提供详细的庭审和公告细节。这一功能可以帮助法律从业者、企业管理人员或风险控制部门了解特定企业的法律诉讼情况及历史记录。场景包括企业尽职调查、市场竞争分析，以及企业内部风险管理，例如当涉及到企业收购或投资决策时，需要评估目标企业的法律状态与潜在风险。
 
 
     请求参数:
-    - pageIndex: 页码 类型：int
+    - pageIndex: 页码 类型：int - 从1开始
     - matchKeyword: 匹配关键词 类型：string - 企业名称/注册号/统一社会信用代码/企业id，如果没有企业全称则先调取fuzzy_search接口获取企业全称。
     - pageSize: 分页大小 类型：int - 一页最多获取50条数据
     - keywordType: 主体类型 类型：select - 主体类型枚举（name：企业名称，nameId：企业id，regNumber：注册号，socialCreditCode：统一社会信用代码)
@@ -308,7 +308,7 @@ def risk_insight_litigation_risk_profile(matchKeyword: str, keywordType: str = N
 
 
 @mcp.tool()
-def risk_insight_court_announcements(matchKeyword: str, pageIndex: int = None, pageSize: int = None,
+def risk_insight_court_announcements(matchKeyword: str, pageIndex: int = 1, pageSize: int = 10,
                         keywordType: str = None) -> dict:
     """
     该接口的功能是查询特定企业在法院公告中的相关信息，包括庭审地点、当事人、案由等细节，并以列表形式呈现。这一接口主要应用于法律、合规领域内的背景调查中，帮助律师、法务人员或企业合规团队获取目标企业涉及的历史及当前法律诉讼或公告信息，从而评估企业潜在法律风险。这个接口也可能被金融机构在企业信贷评估或风险监控中使用，以查看企业当前或过往是否曾卷入法律纠纷，以及该企业在司法体系中的信用表现。
@@ -316,7 +316,7 @@ def risk_insight_court_announcements(matchKeyword: str, pageIndex: int = None, p
 
     请求参数:
     - matchKeyword: 匹配关键词 类型：string - 企业名称/注册号/统一社会信用代码/企业id，如果没有企业全称则先调取fuzzy_search接口获取企业全称。
-    - pageIndex: 页码 类型：int
+    - pageIndex: 页码 类型：int - 从1开始
     - pageSize: 分页大小 类型：int - 一页最多获取50条数据
     - keywordType: 主体类型 类型：select - 主体类型枚举（name：企业名称，nameId：企业id，regNumber：注册号，socialCreditCode：统一社会信用代码)
 
@@ -387,7 +387,7 @@ def risk_insight_intellectual_property_pledge(matchKeyword: str, keywordType: st
 
 
 @mcp.tool()
-def risk_insight_tax_penalties(matchKeyword: str, pageIndex: int = None, keywordType: str = None, pageSize: int = None) -> dict:
+def risk_insight_tax_penalties(matchKeyword: str, pageIndex: int = 1, keywordType: str = None, pageSize: int = None) -> dict:
     """
     该接口的功能是查询某一企业在税务局的行政处罚记录，包括处罚的详细信息，如处罚原因、结果、决定机关等。它可以用于企业合规审查、信用评估、合作前调查等场景。例如，企业在招标或融资前对自身或合作方进行法律合规性检查，防范合作风险；金融机构在贷款审核中审查企业信用风险，确保交易安全；政府监管部门进行定期监督检查，促进市场健康发展。通过该接口获取的详细处罚信息，可以帮助判断企业在市场中的信誉和法律合规情况，辅助决策过程。
 
@@ -461,7 +461,7 @@ def risk_insight_business_anomalies(matchKeyword: str, keywordType: str = None) 
 
 
 @mcp.tool()
-def risk_insight_consumption_restrictions(matchKeyword: str, pageIndex: int = None, keywordType: str = None,
+def risk_insight_consumption_restrictions(matchKeyword: str, pageIndex: int = 1, keywordType: str = None,
                              pageSize: int = None) -> dict:
     """
     该接口功能是查询特定企业或其负责人是否存在限制高消费的司法记录，输出结果包括立案时间、案号、执行法院等详细信息。此接口适用于律师事务所、金融机构或商业伙伴在进行企业信用评估和风险控制时，用于核查潜在合作对象是否存在限制消费令，这可能影响其信用状况及履行商业合同的能力，从而决定是否进行合作或采取预防性措施。
@@ -469,7 +469,7 @@ def risk_insight_consumption_restrictions(matchKeyword: str, pageIndex: int = No
 
     请求参数:
     - matchKeyword: 匹配关键词 类型：string - 企业名称/注册号/统一社会信用代码/企业id，如果没有企业全称则先调取fuzzy_search接口获取企业全称。
-    - pageIndex: 页码 类型：int
+    - pageIndex: 页码 类型：int - 从1开始
     - keywordType: 主体类型 类型：select - 主体类型枚举（name：企业名称，nameId：企业id，regNumber：注册号，socialCreditCode：统一社会信用代码)
     - pageSize: 分页大小 类型：int - 一页最多获取50条数据
 
