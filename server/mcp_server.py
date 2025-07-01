@@ -397,37 +397,29 @@ def risk_insight_tax_penalties(matchKeyword: str, pageIndex: int = 1, keywordTyp
 
     请求参数:
     - matchKeyword: 匹配关键词 类型：string - 企业名称/注册号/统一社会信用代码/企业id，如果没有企业全称则先调取fuzzy_search接口获取企业全称。
-    - pageIndex: 分页开始位置 类型：int
     - keywordType: 主体类型 类型：select - 主体类型枚举（name：企业名称，nameId：企业id，regNumber：注册号，socialCreditCode：统一社会信用代码）
-    - pageSize: 分页结束位置 类型：int - 一页最多获取50条数据
 
     返回参数:
-    - reason: 处罚原因 类型：string
-    - total: 总数 类型：int
-    - publishDate: 公示日期 类型：string
-    - resultList: 结果列表 类型：list of dict
-    - result: 处罚结果 类型：string
-    - punishmentFileLink: 行政处罚文件链接 类型：string
-    - authority: 决定机关 类型：string
-    - content: 行政处罚内容 类型：string
-    - decisionDate: 决定日期 类型：string
-    - sources: 数据来源 类型：list of string
-    - type: 违法行为类型 类型：string
-    - id: 决定书文号 类型：string
+    - punishmentCount: 行政处罚数量 类型：int
+    - punishmentList: 行政处罚列表 类型：list of dict
+        - punishContent: 行政处罚内容 类型：string
+        - punishAuthority: 决定机关 类型：string
+        - punishDecisionDate: 决定日期 类型：string
+        - punishId: 决定书文号 类型：string
+        - punishType: 违法行为类型 类型：string
+        - punishDate: 公示日期 类型：string
     """
     # 构建请求参数
     params = {
         'matchKeyword': matchKeyword,
-        'pageIndex': pageIndex,
-        'keywordType': keywordType,
-        'pageSize': pageSize,
+        'keywordType': keywordType
     }
 
     # 过滤None值
     params = {k: v for k, v in params.items() if v is not None}
 
     # 调用API
-    return call_api('66c702b725f04ab44cd24d32', params)
+    return call_api('66a24a59515324c521d6610d', params)
 
 
 @mcp.tool()
