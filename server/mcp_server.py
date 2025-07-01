@@ -109,7 +109,6 @@ def risk_insight_fuzzy_search(matchKeyword: str, pageIndex: int = 1, pageSize: i
 
     返回参数:
     - total: 总数 类型：int
-    - resultList: 结果列表 类型：list of dict
     - annualTurnover: 年营业额 类型：string
     - formerNames: 曾用名 类型：list of string
     - address: 注册地址 类型：string
@@ -220,17 +219,16 @@ def risk_insight_court_hearings(matchKeyword: str, pageIndex: int = 1, pageSize:
 
     返回参数:
     - total: 总数 类型：int
-    - resultList: 列表结果 类型：list of dict
-        - address: 庭审地点 类型：string
-        - caseReason: 案由 类型：string
-        - date: 开庭日期 类型：string
-        - publishPage: 公告版面 类型：string
-        - publishDate: 公告日期 类型：string
-        - publishUnit: 开庭法院 类型：string
-        - caseType: 公告类型 类型：string
-        - relatedCaseNumber: 案号 类型：string
-        - caseId: 开庭公告id 类型：string
-        - caseRelatedPerson: 当事人 类型：dict
+    - address: 庭审地点 类型：string
+    - caseReason: 案由 类型：string
+    - date: 开庭日期 类型：string
+    - publishPage: 公告版面 类型：string
+    - publishDate: 公告日期 类型：string
+    - publishUnit: 开庭法院 类型：string
+    - caseType: 公告类型 类型：string
+    - relatedCaseNumber: 案号 类型：string
+    - caseId: 开庭公告id 类型：string
+    - caseRelatedPerson: 当事人 类型：dict
     """
     # 构建请求参数
     params = {
@@ -288,17 +286,16 @@ def risk_insight_court_announcements(matchKeyword: str, pageIndex: int = 1, page
 
     返回参数:
     - total: 总数 类型：int
-    - resultList: 列表结果 类型：list of dict
-        - caseType: 公告类型 类型：string
-        - date: 开庭日期 类型：string
-        - caseRelatedPerson: 当事人 类型：list of dict
-        - address: 庭审地点 类型：string
-        - publishDate: 公告日期 类型：string
-        - publishUnit: 开庭法院 类型：string
-        - caseReason: 案由 类型：string
-        - relatedCaseNumber: 案号 类型：string
-        - publishPage: 公告版面 类型：string
-        - caseId: 法院公告id 类型：string
+    - caseType: 公告类型 类型：string
+    - date: 开庭日期 类型：string
+    - caseRelatedPerson: 当事人 类型：list of dict
+    - address: 庭审地点 类型：string
+    - publishDate: 公告日期 类型：string
+    - publishUnit: 开庭法院 类型：string
+    - caseReason: 案由 类型：string
+    - relatedCaseNumber: 案号 类型：string
+    - publishPage: 公告版面 类型：string
+    - caseId: 法院公告id 类型：string
     """
     # 构建请求参数
     params = {
@@ -433,14 +430,13 @@ def risk_insight_consumption_restrictions(matchKeyword: str, pageIndex: int = 1,
 
     返回参数:
     - total: 总数 类型：int  
-    - resultList: 列表结果 类型：list of dict
-        - efCaseCreateTime: 立案时间 类型：string
-        - efCaseNumber: 案号 类型：string
-        - efLimitedApplicant: 申请人 类型：list of string
-        - efExecutiveCourt: 执行法院 类型：string
-        - efLimitedPersonCasePublishTime: 发布日期 类型：string
-        - efLimitedPersonName: 限制消费人员 类型：string
-        - efLimitedPersonProvince: 省份 类型：string
+    - efCaseCreateTime: 立案时间 类型：string
+    - efCaseNumber: 案号 类型：string
+    - efLimitedApplicant: 申请人 类型：list of string
+    - efExecutiveCourt: 执行法院 类型：string
+    - efLimitedPersonCasePublishTime: 发布日期 类型：string
+    - efLimitedPersonName: 限制消费人员 类型：string
+    - efLimitedPersonProvince: 省份 类型：string
     """
     # 构建请求参数
     params = {

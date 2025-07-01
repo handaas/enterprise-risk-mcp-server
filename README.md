@@ -125,7 +125,6 @@ python server/mcp_server.py streamable-http
 
 **返回值**:
 - `total`: 总数
-- `resultList`: 结果列表
 
 ### 2. risk_insight_serious_violations
 **功能**: 严重违法记录查询
