@@ -169,29 +169,29 @@ def risk_insight_chattel_mortgage(matchKeyword: str, keywordType: str = None) ->
     返回参数:
     - mortgageCount: 动产抵押数量 类型：int
     - mortgageInfoList: 动产抵押列表 类型：list of dict
-    - authority: 登记机关 类型：string
-    - mortgageId: 登记编号 类型：dict
-    - date: 登记日期 类型：string
-    - amount: 被担保债权数额 类型：string
-    - publicationDate: 公示日期 类型：string
-    - term: 债务人履行债务的期限 类型：string
-    - type: 种类 类型：string
-    - guaranteedCreditorInfo: 被担保主债券信息 类型：dict
-    - mortgageeList: 抵押权人信息 类型：list of dict
-    - scope: 担保的范围 类型：string
-    - identifacationNo: 证件号码 类型：string
-    - identificationType: 证件类型 类型：string
-    - address: 抵押权人住所地 类型：string
-    - amount: 数额 类型：string
-    - name: 抵押权人名称 类型：string
-    - owner: 所有权或使用权归属 类型：string
-    - name: 抵押物名称 类型：string
-    - remark: 备注 类型：string
-    - detail: 抵押物详情 类型：string - 数量、质量、状况、所在地等情况
-    - pawnList: 抵押物信息 类型：list of dict
-    - revokeInfo: 注销信息 类型：dict
-    - date: 注销日期 类型：string
-    - reason: 注销原因 类型：string
+        - authority: 登记机关 类型：string
+        - mortgageId: 登记编号 类型：dict
+        - date: 登记日期 类型：string
+        - amount: 被担保债权数额 类型：string
+        - publicationDate: 公示日期 类型：string
+        - term: 债务人履行债务的期限 类型：string
+        - type: 种类 类型：string
+        - guaranteedCreditorInfo: 被担保主债券信息 类型：dict
+        - mortgageeList: 抵押权人信息 类型：list of dict
+        - scope: 担保的范围 类型：string
+        - identifacationNo: 证件号码 类型：string
+        - identificationType: 证件类型 类型：string
+        - address: 抵押权人住所地 类型：string
+        - amount: 数额 类型：string
+        - name: 抵押权人名称 类型：string
+        - owner: 所有权或使用权归属 类型：string
+        - name: 抵押物名称 类型：string
+        - remark: 备注 类型：string
+        - detail: 抵押物详情 类型：string - 数量、质量、状况、所在地等情况
+        - pawnList: 抵押物信息 类型：list of dict
+        - revokeInfo: 注销信息 类型：dict
+        - date: 注销日期 类型：string
+        - reason: 注销原因 类型：string
     """
     # 构建请求参数
     params = {
@@ -219,18 +219,18 @@ def risk_insight_court_hearings(matchKeyword: str, pageIndex: int = 1, pageSize:
     - keywordType: 主体类型 类型：select - 主体类型枚举（name：企业名称，nameId：企业id，regNumber：注册号，socialCreditCode：统一社会信用代码)
 
     返回参数:
-    - resultList: 列表结果 类型：list of dict
     - total: 总数 类型：int
-    - address: 庭审地点 类型：string
-    - caseReason: 案由 类型：string
-    - date: 开庭日期 类型：string
-    - publishPage: 公告版面 类型：string
-    - publishDate: 公告日期 类型：string
-    - publishUnit: 开庭法院 类型：string
-    - caseType: 公告类型 类型：string
-    - relatedCaseNumber: 案号 类型：string
-    - caseId: 开庭公告id 类型：string
-    - caseRelatedPerson: 当事人 类型：dict
+    - resultList: 列表结果 类型：list of dict
+        - address: 庭审地点 类型：string
+        - caseReason: 案由 类型：string
+        - date: 开庭日期 类型：string
+        - publishPage: 公告版面 类型：string
+        - publishDate: 公告日期 类型：string
+        - publishUnit: 开庭法院 类型：string
+        - caseType: 公告类型 类型：string
+        - relatedCaseNumber: 案号 类型：string
+        - caseId: 开庭公告id 类型：string
+        - caseRelatedPerson: 当事人 类型：dict
     """
     # 构建请求参数
     params = {
@@ -258,44 +258,7 @@ def risk_insight_litigation_risk_profile(matchKeyword: str, keywordType: str = N
     - keywordType: 主体类型 类型：select - 主体类型枚举（name：企业名称，nameId：企业id，regNumber：注册号，socialCreditCode：统一社会信用代码）
 
     返回参数:
-    - caList: 法院公告列表 类型：list of dict - 最多返回50条
-    - _id: 公告id 类型：string
-    - caRelatedCaseNumber: 案号 类型：string
-    - caType: 公告类型 类型：string
-    - caPublishDate: 公告日期 类型：string
-    - caTotal: 法院公告总数 类型：int
-    - caLianTotal: 立案公告总数 类型：int
-    - caLianList: 立案公告列表 类型：list of dict - 最多返回50条
-    - _id: 公告id 类型：string
-    - caRelatedCaseNumber: 案号 类型：string
-    - caType: 公告类型 类型：string
-    - _id: 公告id 类型：string
-    - caRelatedCaseNumber: 案号 类型：string
-    - caKaitingTotal: 开庭公告总数 类型：int
-    - caKaitingList: 开庭公告列表 类型：list of dict - 最多返回50条
-    - caPublishDate: 公告日期 类型：string
-    - caType: 公告类型 类型：string
-    - jdTotal: 裁判文书总数 类型：int
-    - caPublishDate: 公告日期 类型：string
-    - jdList: 裁判文书列表 类型：list of dict - 最多返回50条
-    - _id: 裁判文书id 类型：string
-    - enforcementList: 被执行人列表 类型：list of dict - 最多返回50条
-    - jdPublishDate: 发布日期 类型：string
-    - _id: 被执行人id 类型：string
-    - efCaseNumberDetail: 案号 类型：string
-    - edTotal: 失信被执行人总数 类型：int
-    - jdCaseNumber: 案号 类型：string
-    - efCaseCreateTime: 立案时间 类型：string
-    - edList: 失信被执行人列表 类型：list of dict - 最多返回50条
-    - _id: 失信被执行人id 类型：string
-    - enforcementTotal: 被执行人总数 类型：int
-    - efDishonestCaseCreateTime: 立案日期 类型：string
-    - limitedTotal: 限制高消费总数 类型：int
-    - _id: 限制高消费id 类型：string
-    - limitedList: 限制高消费列表 类型：list of dict - 最多返回50条
-    - efCaseCreateTime: 立案时间 类型：string
-    - efCaseNumber: 案号 类型：string
-    - efDishonestCaseNumber: 案号 类型：string
+    
     """
     # 构建请求参数
     params = {
@@ -326,16 +289,16 @@ def risk_insight_court_announcements(matchKeyword: str, pageIndex: int = 1, page
     返回参数:
     - total: 总数 类型：int
     - resultList: 列表结果 类型：list of dict
-    - caseType: 公告类型 类型：string
-    - date: 开庭日期 类型：string
-    - caseRelatedPerson: 当事人 类型：list of dict
-    - address: 庭审地点 类型：string
-    - publishDate: 公告日期 类型：string
-    - publishUnit: 开庭法院 类型：string
-    - caseReason: 案由 类型：string
-    - relatedCaseNumber: 案号 类型：string
-    - publishPage: 公告版面 类型：string
-    - caseId: 法院公告id 类型：string
+        - caseType: 公告类型 类型：string
+        - date: 开庭日期 类型：string
+        - caseRelatedPerson: 当事人 类型：list of dict
+        - address: 庭审地点 类型：string
+        - publishDate: 公告日期 类型：string
+        - publishUnit: 开庭法院 类型：string
+        - caseReason: 案由 类型：string
+        - relatedCaseNumber: 案号 类型：string
+        - publishPage: 公告版面 类型：string
+        - caseId: 法院公告id 类型：string
     """
     # 构建请求参数
     params = {
@@ -364,17 +327,17 @@ def risk_insight_intellectual_property_pledge(matchKeyword: str, keywordType: st
 
     返回参数:
     - iprPledgeCount: 知识产权出质数量 类型：int
-    - iprName: 知识产权名称 类型：string
-    - iprPledgePeriod: 质权登记期限 类型：dict
     - iprPledgeList: 知识产权出质列表 类型：list of dict
-    - iprPledgePublicDate: 知识产权公示日期 类型：string
-    - iprPledgeeName: 知识产权质权人 类型：string
-    - iprRegisterNum: 知识产权登记编号 类型：string
-    - iprPledgorName: 知识产权出质人 类型：string
-    - iprType: 知识产权种类 类型：string
-    - iprPledgeRevokeDate: 知识产权注销日期 类型：string
-    - iprPledgeRevokeReason: 知识产权注销原因 类型：string
-    - iprStatus: 知识产权状态 类型：string
+        - iprName: 知识产权名称 类型：string
+        - iprPledgePeriod: 质权登记期限 类型：dict
+        - iprPledgePublicDate: 知识产权公示日期 类型：string
+        - iprPledgeeName: 知识产权质权人 类型：string
+        - iprRegisterNum: 知识产权登记编号 类型：string
+        - iprPledgorName: 知识产权出质人 类型：string
+        - iprType: 知识产权种类 类型：string
+        - iprPledgeRevokeDate: 知识产权注销日期 类型：string
+        - iprPledgeRevokeReason: 知识产权注销原因 类型：string
+        - iprStatus: 知识产权状态 类型：string
     """
     # 构建请求参数
     params = {
@@ -390,9 +353,9 @@ def risk_insight_intellectual_property_pledge(matchKeyword: str, keywordType: st
 
 
 @mcp.tool()
-def risk_insight_tax_penalties(matchKeyword: str, pageIndex: int = 1, keywordType: str = None, pageSize: int = None) -> dict:
+def risk_insight_penalties(matchKeyword: str, keywordType: str = None) -> dict:
     """
-    该接口的功能是查询某一企业在税务局的行政处罚记录，包括处罚的详细信息，如处罚原因、结果、决定机关等。它可以用于企业合规审查、信用评估、合作前调查等场景。例如，企业在招标或融资前对自身或合作方进行法律合规性检查，防范合作风险；金融机构在贷款审核中审查企业信用风险，确保交易安全；政府监管部门进行定期监督检查，促进市场健康发展。通过该接口获取的详细处罚信息，可以帮助判断企业在市场中的信誉和法律合规情况，辅助决策过程。
+    该接口的功能是查询某一企业行政处罚记录，包括处罚的详细信息，如处罚原因、结果、决定机关等。它可以用于企业合规审查、信用评估、合作前调查等场景。例如，企业在招标或融资前对自身或合作方进行法律合规性检查，防范合作风险；金融机构在贷款审核中审查企业信用风险，确保交易安全；政府监管部门进行定期监督检查，促进市场健康发展。通过该接口获取的详细处罚信息，可以帮助判断企业在市场中的信誉和法律合规情况，辅助决策过程。
 
 
     请求参数:
@@ -435,12 +398,12 @@ def risk_insight_business_anomalies(matchKeyword: str, keywordType: str = None) 
     返回参数:
     - anomalyCount: 经营异常数量 类型：int
     - anomalyList: 经营异常列表 类型：list of dict
-    - removeAuthority: 移出决定机关 类型：string
-    - createDate: 列入日期 类型：string
-    - removeDate: 移出日期 类型：string
-    - createReason: 列入经营异常名录原因 类型：string
-    - removeReason: 移出经营异常名录原因 类型：string
-    - createAuthority: 列入决定机关 类型：string
+        - removeAuthority: 移出决定机关 类型：string
+        - createDate: 列入日期 类型：string
+        - removeDate: 移出日期 类型：string
+        - createReason: 列入经营异常名录原因 类型：string
+        - removeReason: 移出经营异常名录原因 类型：string
+        - createAuthority: 列入决定机关 类型：string
     """
     # 构建请求参数
     params = {
@@ -469,15 +432,15 @@ def risk_insight_consumption_restrictions(matchKeyword: str, pageIndex: int = 1,
     - pageSize: 分页大小 类型：int - 一页最多获取50条数据
 
     返回参数:
-    - efCaseCreateTime: 立案时间 类型：string
-    - total: 总数 类型：int
-    - efCaseNumber: 案号 类型：string
-    - efLimitedApplicant: 申请人 类型：list of string
-    - efExecutiveCourt: 执行法院 类型：string
+    - total: 总数 类型：int  
     - resultList: 列表结果 类型：list of dict
-    - efLimitedPersonCasePublishTime: 发布日期 类型：string
-    - efLimitedPersonName: 限制消费人员 类型：string
-    - efLimitedPersonProvince: 省份 类型：string
+        - efCaseCreateTime: 立案时间 类型：string
+        - efCaseNumber: 案号 类型：string
+        - efLimitedApplicant: 申请人 类型：list of string
+        - efExecutiveCourt: 执行法院 类型：string
+        - efLimitedPersonCasePublishTime: 发布日期 类型：string
+        - efLimitedPersonName: 限制消费人员 类型：string
+        - efLimitedPersonProvince: 省份 类型：string
     """
     # 构建请求参数
     params = {

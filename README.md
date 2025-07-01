@@ -269,30 +269,26 @@ python server/mcp_server.py streamable-http
   - `iprPledgeRevokeReason`: 知识产权注销原因
   - `iprStatus`: 知识产权状态
 
-### 8. risk_insight_tax_penalties
-**功能**: 税务行政处罚查询
+### 8. risk_insight_penalties
+**功能**: 行政处罚查询
 
-查询某一企业在税务局的行政处罚记录，包括处罚的详细信息。
+查询某一企业的行政处罚记录，包括处罚的详细信息。
 
 **参数**:
 - `matchKeyword` (必需): 企业名称/注册号/统一社会信用代码/企业id
-- `pageIndex` (可选): 分页开始位置
 - `keywordType` (可选): 主体类型枚举
-- `pageSize` (可选): 分页结束位置
 
 **返回值**:
-- `total`: 总数
-- `resultList`: 结果列表
-  - `reason`: 处罚原因
-  - `publishDate`: 公示日期
-  - `result`: 处罚结果
-  - `punishmentFileLink`: 行政处罚文件链接
-  - `authority`: 决定机关
-  - `content`: 行政处罚内容
-  - `decisionDate`: 决定日期
-  - `sources`: 数据来源
-  - `type`: 违法行为类型
-  - `id`: 决定书文号
+- `taxPenaltyCount`: 税务行政处罚数量
+- `taxPenaltyList`: 税务行政处罚列表
+  - `penaltyDate`: 处罚日期
+  - `penaltyAmount`: 处罚金额
+  - `penaltyReason`: 处罚事由
+  - `penaltyType`: 处罚类型
+  - `penaltyAuthority`: 处罚机关
+  - `penaltyDecisionNumber`: 处罚决定书文号
+  - `legalBasis`: 法律依据
+  - `penaltyStatus`: 处罚状态
 
 ### 9. risk_insight_business_anomalies
 **功能**: 经营异常查询
