@@ -9,7 +9,7 @@ import sys
 
 load_dotenv()
 
-mcp = FastMCP("企业风险分析洞察", instructions="企业风险分析洞察",dependencies=["python-dotenv", "requests"])
+mcp = FastMCP("企业风险分析洞察", instructions="企业风险分析洞察", dependencies=["python-dotenv", "requests"])
 
 INTEGRATOR_ID = os.environ.get("INTEGRATOR_ID")
 SECRET_ID = os.environ.get("SECRET_ID")
@@ -80,13 +80,13 @@ def risk_insight_serious_violations(matchKeyword: str, keywordType: str = None) 
     返回参数:
     - illegalCount: 严重违法数量 类型：int
     - illegalInfoList: 严重违法列表 类型：list of dict
-    - createAuthority: 做出决定机关（列入） 类型：string
-    - createDate: 列入日期 类型：string
-    - createReason: 列入原因 类型：string
-    - removeAuthority: 做出决定机关（移除） 类型：string
-    - removeDate: 移除日期 类型：string
-    - type: 类别 类型：string
-    - removeReason: 移除原因 类型：string
+        - createAuthority: 做出决定机关（列入） 类型：string
+        - createDate: 列入日期 类型：string
+        - createReason: 列入原因 类型：string
+        - removeAuthority: 做出决定机关（移除） 类型：string
+        - removeDate: 移除日期 类型：string
+        - type: 类别 类型：string
+        - removeReason: 移除原因 类型：string
     """
     # 构建请求参数
     params = {
@@ -102,48 +102,48 @@ def risk_insight_serious_violations(matchKeyword: str, keywordType: str = None) 
 
 
 @mcp.tool()
-def risk_insight_fuzzy_search(matchKeyword: str, pageIndex: int = 1, pageSize: int = None) -> dict:
+def risk_insight_fuzzy_search(matchKeyword: str, pageIndex: int = 1, pageSize: int = 50) -> dict:
     """
     该接口的功能是根据提供的企业名称、人名、品牌、产品、岗位等关键词模糊查询相关企业列表。返回匹配的企业列表及其详细信息，用于查找和识别特定的企业信息。
 
     请求参数:
     - matchKeyword: 匹配关键词 类型：string - 查询各类信息包含匹配关键词的企业
-    - pageIndex: 分页开始位置 类型：int
-    - pageSize: 分页结束位置 类型：int - 一页最多获取50条数据
+    - pageIndex: 分页开始位置 类型：int - 默认从1开始
+    - pageSize: 分页结束位置 类型：int - 一页最多获取50条数据, 不能超过50, 超过50的统一用50代替
 
     返回参数:
     - total: 总数 类型：int
-    - annualTurnover: 年营业额 类型：string
-    - formerNames: 曾用名 类型：list of string
-    - address: 注册地址 类型：string
-    - foundTime: 成立时间 类型：string
-    - enterpriseType: 企业主体类型 类型：string
-    - legalRepresentative: 法定代表人 类型：string
-    - homepage: 企业官网 类型：string
-    - legalRepresentativeId: 法定代表人id 类型：string
-    - prmtKeys: 推广关键词 类型：list of string
-    - operStatus: 企业状态 类型：string
-    - logo: 企业logo 类型：string
-    - nameId: 企业id 类型：string
-    - regCapitalCoinType: 注册资本币种 类型：string
-    - regCapitalValue: 注册资本金额 类型：int
-    - name: 企业名称 类型：string
-    - catchReason: 命中原因 类型：dict
-    - catchReason.name: 企业名称 类型：list of string
-    - catchReason.formerNames: 曾用名 类型：list of string
-    - catchReason.holderList: 股东 类型：list of string
-    - catchReason.recruitingName: 招聘岗位 类型：list of string
-    - catchReason.address: 地址 类型：list of string
-    - catchReason.operBrandList: 品牌 类型：list of string
-    - catchReason.goodsNameList: 产品名称 类型：list of string
-    - catchReason.phoneList: 固话 类型：list of string
-    - catchReason.emailList: 邮箱 类型：list of string
-    - catchReason.mobileList: 手机 类型：list of string
-    - catchReason.patentNameList: 专利 类型：list of string
-    - catchReason.certNameList: 资质证书 类型：list of string
-    - catchReason.prmtKeys: 推广关键词 类型：list of string
-    - catchReason.socialCreditCode: 统一社会信用代码 类型：list of string
-
+    - resultList:查询返回企业信息列表 类型：list of dict:
+        - annualTurnover: 年营业额 类型：string
+        - formerNames: 曾用名 类型：list of string
+        - address: 注册地址 类型：string
+        - foundTime: 成立时间 类型：string
+        - enterpriseType: 企业主体类型 类型：string
+        - legalRepresentative: 法定代表人 类型：string
+        - legalRepresentativeId: 法定代表人id 类型：string
+        - homepage: 企业官网 类型：string
+        - prmtKeys: 推广关键词 类型：list of string
+        - operStatus: 企业状态 类型：string
+        - logo: 企业logo 类型：string
+        - nameId: 企业id 类型：string
+        - regCapitalCoinType: 注册资本币种 类型：string
+        - regCapitalValue: 注册资本金额 类型：int
+        - name: 企业名称 类型：string
+        - catchReason: 命中原因 类型：dict
+            - catchReason.name: 企业名称 类型：list of string
+            - catchReason.formerNames: 曾用名 类型：list of string
+            - catchReason.holderList: 股东 类型：list of string
+            - catchReason.recruitingName: 招聘岗位 类型：list of string
+            - catchReason.address: 地址 类型：list of string
+            - catchReason.operBrandList: 品牌 类型：list of string
+            - catchReason.goodsNameList: 产品名称 类型：list of string
+            - catchReason.phoneList: 固话 类型：list of string
+            - catchReason.emailList: 邮箱 类型：list of string
+            - catchReason.mobileList: 手机 类型：list of string
+            - catchReason.patentNameList: 专利 类型：list of string
+            - catchReason.certNameList: 资质证书 类型：list of string
+            - catchReason.prmtKeys: 推广关键词 类型：list of string
+            - catchReason.socialCreditCode: 统一社会信用代码 类型：list of string
     """
     # 构建请求参数
     params = {
@@ -216,23 +216,24 @@ def risk_insight_court_hearings(matchKeyword: str, pageIndex: int = 1, pageSize:
 
 
     请求参数:
-    - pageIndex: 页码 类型：int - 从1开始
+    - pageIndex: 页码 类型：int - 默认从1开始
     - matchKeyword: 匹配关键词 类型：string - 企业名称/注册号/统一社会信用代码/企业id，如果没有企业全称则先调取fuzzy_search接口获取企业全称。
-    - pageSize: 分页大小 类型：int - 一页最多获取50条数据
+    - pageSize: 分页大小 类型：int - 一页最多获取50条数据, 不能超过50, 超过50的统一用50代替
     - keywordType: 主体类型 类型：select - 主体类型枚举（name：企业名称，nameId：企业id，regNumber：注册号，socialCreditCode：统一社会信用代码)
 
     返回参数:
+    - resultList: 列表结果 类型：list of dict
+        - address: 庭审地点 类型：string
+        - caseReason: 案由 类型：string
+        - date: 开庭日期 类型：string
+        - publishPage: 公告版面 类型：string
+        - publishDate: 公告日期 类型：string
+        - publishUnit: 开庭法院 类型：string
+        - caseType: 公告类型 类型：string
+        - relatedCaseNumber: 案号 类型：string
+        - caseId: 开庭公告id 类型：string
+        - caseRelatedPerson: 当事人 类型：dict
     - total: 总数 类型：int
-    - address: 庭审地点 类型：string
-    - caseReason: 案由 类型：string
-    - date: 开庭日期 类型：string
-    - publishPage: 公告版面 类型：string
-    - publishDate: 公告日期 类型：string
-    - publishUnit: 开庭法院 类型：string
-    - caseType: 公告类型 类型：string
-    - relatedCaseNumber: 案号 类型：string
-    - caseId: 开庭公告id 类型：string
-    - caseRelatedPerson: 当事人 类型：dict
     """
     # 构建请求参数
     params = {
@@ -260,7 +261,44 @@ def risk_insight_litigation_risk_profile(matchKeyword: str, keywordType: str = N
     - keywordType: 主体类型 类型：select - 主体类型枚举（name：企业名称，nameId：企业id，regNumber：注册号，socialCreditCode：统一社会信用代码）
 
     返回参数:
-    
+    - caList: 法院公告列表 类型：list of dict - 最多返回50条
+        - _id: 公告id 类型：string
+        - caPublishDate: 公告日期 类型：string
+        - caRelatedCaseNumber: 案号 类型：string
+        - caType: 公告类型 类型：string
+    - caLianList: 立案公告列表 类型：list of dict - 最多返回50条
+        - _id: 公告id 类型：string
+        - caPublishDate: 公告日期 类型：string
+        - caRelatedCaseNumber: 案号 类型：string
+        - caType: 公告类型 类型：string
+    - caKaitingList: 开庭公告列表 类型：list of dict - 最多返回50条
+        - _id: 公告id 类型：string
+        - caPublishDate: 公告日期 类型：string
+        - caRelatedCaseNumber: 案号 类型：string
+        - caType: 公告类型 类型：string
+    - jdList: 裁判文书列表 类型：list of dict - 最多返回50条
+        - _id: 裁判文书id 类型：string
+        - jdCaseNumber: 案号 类型：string
+        - jdPublishDate: 发布日期 类型：string
+    - enforcementList: 被执行人列表 类型：list of dict - 最多返回50条
+        - _id: 被执行人id 类型：string
+        - efCaseNumberDetail: 案号 类型：string
+        - efCaseCreateTime: 立案时间 类型：string
+    - edList: 失信被执行人列表 类型：list of dict - 最多返回50条
+        - _id: 失信被执行人id 类型：string
+        - efDishonestCaseCreateTime: 立案日期 类型：string
+        - efDishonestCaseNumber: 案号 类型：string
+    - limitedList: 限制高消费列表 类型：list of dict - 最多返回50条
+        - _id: 限制高消费id 类型：string
+        - efCaseCreateTime: 立案时间 类型：string
+        - efCaseNumber: 案号 类型：string
+    - caKaitingTotal: 开庭公告总数 类型：int
+    - caLianTotal: 立案公告总数 类型：int
+    - caTotal: 法院公告总数 类型：int
+    - edTotal: 失信被执行人总数 类型：int
+    - enforcementTotal: 被执行人总数 类型：int
+    - jdTotal: 裁判文书总数 类型：int
+    - limitedTotal: 限制高消费总数 类型：int
     """
     # 构建请求参数
     params = {
@@ -284,22 +322,23 @@ def risk_insight_court_announcements(matchKeyword: str, pageIndex: int = 1, page
 
     请求参数:
     - matchKeyword: 匹配关键词 类型：string - 企业名称/注册号/统一社会信用代码/企业id，如果没有企业全称则先调取fuzzy_search接口获取企业全称。
-    - pageIndex: 页码 类型：int - 从1开始
-    - pageSize: 分页大小 类型：int - 一页最多获取50条数据
+    - pageIndex: 页码 类型：int - 默认从1开始
+    - pageSize: 分页大小 类型：int - 一页最多获取50条数据, 不能超过50, 超过50的统一用50代替
     - keywordType: 主体类型 类型：select - 主体类型枚举（name：企业名称，nameId：企业id，regNumber：注册号，socialCreditCode：统一社会信用代码)
 
     返回参数:
     - total: 总数 类型：int
-    - caseType: 公告类型 类型：string
-    - date: 开庭日期 类型：string
-    - caseRelatedPerson: 当事人 类型：list of dict
-    - address: 庭审地点 类型：string
-    - publishDate: 公告日期 类型：string
-    - publishUnit: 开庭法院 类型：string
-    - caseReason: 案由 类型：string
-    - relatedCaseNumber: 案号 类型：string
-    - publishPage: 公告版面 类型：string
-    - caseId: 法院公告id 类型：string
+    - resultList: 列表结果 类型：list of dict
+        - caseId: 法院公告id 类型：string
+        - caseReason: 案由 类型：string
+        - caseRelatedPerson: 当事人 类型：list of dict
+        - caseType: 公告类型 类型：string
+        - publishDate: 公告日期 类型：string
+        - publishPage: 公告版面 类型：string
+        - publishUnit: 开庭法院 类型：string
+        - relatedCaseNumber: 案号 类型：string
+        - date: 开庭日期 类型：string
+        - address: 庭审地点 类型：string
     """
     # 构建请求参数
     params = {
@@ -421,26 +460,27 @@ def risk_insight_business_anomalies(matchKeyword: str, keywordType: str = None) 
 
 @mcp.tool()
 def risk_insight_consumption_restrictions(matchKeyword: str, pageIndex: int = 1, keywordType: str = None,
-                             pageSize: int = None) -> dict:
+                             pageSize: int = 10) -> dict:
     """
     该接口功能是查询特定企业或其负责人是否存在限制高消费的司法记录，输出结果包括立案时间、案号、执行法院等详细信息。此接口适用于律师事务所、金融机构或商业伙伴在进行企业信用评估和风险控制时，用于核查潜在合作对象是否存在限制消费令，这可能影响其信用状况及履行商业合同的能力，从而决定是否进行合作或采取预防性措施。
 
 
     请求参数:
     - matchKeyword: 匹配关键词 类型：string - 企业名称/注册号/统一社会信用代码/企业id，如果没有企业全称则先调取fuzzy_search接口获取企业全称。
-    - pageIndex: 页码 类型：int - 从1开始
+    - pageIndex: 页码 类型：int - 默认从1开始
     - keywordType: 主体类型 类型：select - 主体类型枚举（name：企业名称，nameId：企业id，regNumber：注册号，socialCreditCode：统一社会信用代码)
-    - pageSize: 分页大小 类型：int - 一页最多获取50条数据
+    - pageSize: 分页大小 类型：int - 一页最多获取50条数据, 不能超过50, 超过50的统一用50代替
 
     返回参数:
-    - total: 总数 类型：int  
-    - efCaseCreateTime: 立案时间 类型：string
-    - efCaseNumber: 案号 类型：string
-    - efLimitedApplicant: 申请人 类型：list of string
-    - efExecutiveCourt: 执行法院 类型：string
-    - efLimitedPersonCasePublishTime: 发布日期 类型：string
-    - efLimitedPersonName: 限制消费人员 类型：string
-    - efLimitedPersonProvince: 省份 类型：string
+    - total: 总数 类型：int
+    - resultList: 列表结果 类型：list of dict
+        - efCaseCreateTime: 立案时间 类型：string
+        - efCaseNumber: 案号 类型：string
+        - efLimitedApplicant: 申请人 类型：list of string
+        - efExecutiveCourt: 执行法院 类型：string
+        - efLimitedPersonCasePublishTime: 发布日期 类型：string
+        - efLimitedPersonName: 限制消费人员 类型：string
+        - efLimitedPersonProvince: 省份 类型：string
     """
     # 构建请求参数
     params = {
