@@ -330,6 +330,20 @@ python server/mcp_server.py streamable-http
   - `efLimitedPersonName`: 限制消费人员
   - `efLimitedPersonProvince`: 省份
 
+### 11. enterprise_risk_insight_score
+**功能**: 企业风险评分查询
+
+通过传入企业全称来查询某一家企业风险评分以及风险等级，并且列出详细的评分情况，用于企业入驻风险审核等场景。如果没有企业全称则先调取企业模糊查询工具获取企业全称。
+
+**参数**:
+- `matchKeyword` (必需): 企业名称/注册号/统一社会信用代码/企业id，如果没有企业全称则先调取企业模糊查询工具获取企业全称
+- `keywordType` (可选): 主体类型枚举（name：企业名称，nameId：企业id，regNumber：注册号，socialCreditCode：统一社会信用代码）
+
+**返回值**:
+- `riskReason`: 风险原因列表
+- `riskScore`: 风险评分
+- `riskLevel`: 风险等级
+
 ## 使用场景
 
 1. **金融贷款审批**: 银行或金融机构评估借款企业的合规风险
@@ -396,4 +410,10 @@ python server/mcp_server.py streamable-http
 ### risk_insight_consumption_restrictions (限制高消费查询)
 1. 查询腾讯及其高管是否有限制消费令
 2. 阿里巴巴的高管有限制高消费记录吗？
-3. 检查抖音的限制消费情况 
+3. 检查抖音的限制消费情况
+
+### enterprise_risk_insight_score (企业风险评分查询)
+1. 查询腾讯科技有限公司的风险评分和等级
+2. 分析阿里巴巴集团的整体风险评分情况
+3. 抖音的企业风险评分是多少？
+4. 评估某企业的入驻风险等级

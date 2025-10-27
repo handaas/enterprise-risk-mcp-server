@@ -67,44 +67,13 @@ def call_api(product_id: str, params: dict) -> dict:
             return f"接口调用失败，状态码：{response.status_code}"
     except Exception as e:
         return "查询失败"
-    
-@mcp.tool()
-def risk_insight_serious_violations(matchKeyword: str, keywordType: str = None) -> dict:
-    """
-    该接口的功能是查询某一家企业在政府监管下的严重违法记录，包括严重违法的详细信息和处理状态。可能的使用场景包括：在金融贷款审批中，银行或金融机构使用该接口来判断借款企业的合规风险；在企业尽职调查中，投资者或合作伙伴通过此接口获取目标企业的合规历史；在招聘过程中，人力资源部门考察候选公司的背景和合法性；甚至在市场及监管机构内部用于对企业做出合规监督和处罚决策。这样的查询接口是商业风险管理及合规决策中不可或缺的一环。
-
-    请求参数:
-    - matchKeyword:  类型：string - 企业名称/注册号/统一社会信用代码/企业id，如果没有企业全称则先调取fuzzy_search接口获取企业全称。
-    - keywordType:  类型：select - 主体类型枚举（name：企业名称，nameId：企业id，regNumber：注册号，socialCreditCode：统一社会信用代码)
-
-    返回参数:
-    - illegalCount: 严重违法数量 类型：int
-    - illegalInfoList: 严重违法列表 类型：list of dict
-    - createAuthority: 做出决定机关（列入） 类型：string
-    - createDate: 列入日期 类型：string
-    - createReason: 列入原因 类型：string
-    - removeAuthority: 做出决定机关（移除） 类型：string
-    - removeDate: 移除日期 类型：string
-    - type: 类别 类型：string
-    - removeReason: 移除原因 类型：string
-    """
-    # 构建请求参数
-    params = {
-        'matchKeyword': matchKeyword,
-        'keywordType': keywordType,
-    }
-
-    # 过滤None值
-    params = {k: v for k, v in params.items() if v is not None}
-
-    # 调用API
-    return call_api('669fb97b76742e172f2a5193', params)
 
 
 @mcp.tool()
 def risk_insight_fuzzy_search(matchKeyword: str, pageIndex: int = 1, pageSize: int = None) -> dict:
     """
-    该接口的功能是根据提供的企业名称、人名、品牌、产品、岗位等关键词模糊查询相关企业列表。返回匹配的企业列表及其详细信息，用于查找和识别特定的企业信息。
+    企业模糊查询工具：
+    该接口的功能是根据提供的企业名称简称、人名、品牌、产品、岗位等关键词模糊查询相关企业列表。返回匹配的企业列表及其详细信息，用于模糊查询匹配企业全称，如果用户输入的不是企业全称则优先调用该接口。
 
     请求参数:
     - matchKeyword: 匹配关键词 类型：string - 查询各类信息包含匹配关键词的企业
@@ -157,6 +126,66 @@ def risk_insight_fuzzy_search(matchKeyword: str, pageIndex: int = 1, pageSize: i
 
     # 调用API
     return call_api('675cea1f0e009a9ea37edaa1', params)
+
+
+@mcp.tool()
+def risk_insight_serious_violations(matchKeyword: str, keywordType: str = None) -> dict:
+    """
+    该接口的功能是查询某一家企业在政府监管下的严重违法记录，包括严重违法的详细信息和处理状态。可能的使用场景包括：在金融贷款审批中，银行或金融机构使用该接口来判断借款企业的合规风险；在企业尽职调查中，投资者或合作伙伴通过此接口获取目标企业的合规历史；在招聘过程中，人力资源部门考察候选公司的背景和合法性；甚至在市场及监管机构内部用于对企业做出合规监督和处罚决策。这样的查询接口是商业风险管理及合规决策中不可或缺的一环。
+
+    请求参数:
+    - matchKeyword:  类型：string - 企业名称/注册号/统一社会信用代码/企业id，如果没有企业全称则先调取fuzzy_search接口获取企业全称。
+    - keywordType:  类型：select - 主体类型枚举（name：企业名称，nameId：企业id，regNumber：注册号，socialCreditCode：统一社会信用代码)
+
+    返回参数:
+    - illegalCount: 严重违法数量 类型：int
+    - illegalInfoList: 严重违法列表 类型：list of dict
+    - createAuthority: 做出决定机关（列入） 类型：string
+    - createDate: 列入日期 类型：string
+    - createReason: 列入原因 类型：string
+    - removeAuthority: 做出决定机关（移除） 类型：string
+    - removeDate: 移除日期 类型：string
+    - type: 类别 类型：string
+    - removeReason: 移除原因 类型：string
+    """
+    # 构建请求参数
+    params = {
+        'matchKeyword': matchKeyword,
+        'keywordType': keywordType,
+    }
+
+    # 过滤None值
+    params = {k: v for k, v in params.items() if v is not None}
+
+    # 调用API
+    return call_api('669fb97b76742e172f2a5193', params)
+
+
+@mcp.tool()
+def enterprise_risk_insight_score(matchKeyword: str, keywordType: str = None) -> dict:
+    """
+    该接口的功能是通过传入企业全称来查询某一家企业风险评分以及风险等级，并且列出详细的评分情况，用于企业入驻风险审核等场景。如果没有企业全称则先调取企业模糊查询工具获取企业全称。
+
+    请求参数:
+    - matchKeyword:  类型：string - 企业名称/注册号/统一社会信用代码/企业id，如果没有企业全称则先调取企业模糊查询工具获取企业全称。
+    - keywordType:  类型：select - 主体类型枚举（name：企业名称，nameId：企业id，regNumber：注册号，socialCreditCode：统一社会信用代码)
+
+    返回参数:
+    - riskReason	list of string	风险原因	
+    - riskScore	int	风险评分	
+    - riskLevel	string	风险等级
+    """
+    # 构建请求参数
+    params = {
+        'matchKeyword': matchKeyword,
+        'keywordType': keywordType,
+    }
+
+    # 过滤None值
+    params = {k: v for k, v in params.items() if v is not None}
+
+    # 调用API
+    return call_api('68fb5d6c5e8fca298e2b1c7f', params)
 
 
 @mcp.tool()
